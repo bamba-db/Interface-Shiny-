@@ -1,7 +1,7 @@
-#Lê as tabelas OBS:Alterar o diretório 
+#L? as tabelas OBS:Alterar o diret?rio 
 
-Taxonomic <- read.delim("C:\\Users\\Matheus Albuquerque\\Desktop\\coral_taxonomic_metagenomes.tsv")
-functional <- read.delim("C:\\Users\\Matheus Albuquerque\\Desktop\\coral_function_metagenomes.tsv")
+Taxonomic <- read.delim("coral_taxonomic_metagenomes.tsv")
+functional <- read.delim("coral_function_metagenomes.tsv")
 
 #Busca e armazena as colunas de interesse
 
@@ -23,28 +23,28 @@ tamanho2 <- length(functional[,c('metagenome')])
 #Preenche os vetores necessarios
 
 occurenceid <- seq(1,tamanho1)
-basisofrecord <- rep('HumanObservation',x) 
-eventdate <- rep('2007', tamanho1) 
-#decimalLatitude <- rep('2007', x)
-#decimalLongitude <- rep('2007', x)
+basisofrecord <- rep('HumanObservation', tamanho1) 
+eventdate <- rep('2011-02-09', tamanho1) 
+decimalLatitude <- rep('-20.485', tamanho1)
+decimalLongitude <- rep('-36.130', tamanho1)
 
 #Cria a tabela Occurence
 
 occurence <- data.frame(OcurrenceID = occurenceid , BasisOfRecord = basisofrecord, EventDate = eventdate, EventID = metagenome, kingdom =domain, Phylum = phylum, Class = class, Order = order, Family = family, Genus = genus, TaxonRank = species, IndividualCount = abundance, OrganismQuantity = abundance) #, DecimalLatitude = decimalLatitude  , #DecimalLongitude = decimalLongitude)
-write.csv(occurence, "C:\\Users\\Matheus Albuquerque\\Desktop\\Occurence.csv", row.names = FALSE)
+write.csv(occurence, "Occurence.csv", row.names = FALSE)
 
 #Cira a tabela Event
-event <- data.frame(EventID = metagenome, EventDate = eventdate)#, DecimalLatitude = decimalLatitude  , #DecimalLongitude = decimalLongitude)
-write.csv(event, "C:\\Users\\Matheus Albuquerque\\Desktop\\Event.csv", row.names = FALSE)
+event <- data.frame(EventID = metagenome, EventDate = eventdate, DecimalLatitude = decimalLatitude, DecimalLongitude = decimalLongitude)
+write.csv(event, "Event.csv", row.names = FALSE)
 
-#Parametros para o lço
+#Parametros para o l?o
 
 z <- 1
 y <- 1
 
 #Cria um vetor com as nomeclaturas necessarias
 
-measurementtype <- c('Level 1', 'Level 2', 'Level 3', 'Funciton', 'Abundance', 'Avg eValue', 'Avg Ident', 'Avg Align Len', '# hits')
+measurementtype <- c('Level 1', 'Level 2', 'Level 3', 'Function', 'Abundance', 'Avg eValue', 'Avg Ident', 'Avg Align Len', '# hits')
 
 #Cria um vetor com meansurementid
 
@@ -69,10 +69,10 @@ while (z <= tamanho2 ) {
   
 } 
 
-#Cria um vetor auxiliar que preenche de acordo com o numero de vezes de execuçao do laço
+#Cria um vetor auxiliar que preenche de acordo com o numero de vezes de execu?ao do la?o
 names <- rep(measurementtype, z)
 
 #Cria a tabela meansurementorfacts
 meansurementorfacts <- data.frame( EventID= vet2, measurementID = vet1, MeasurementType = names, MeasurementValue = measurementvalue) 
-write.csv(meansurementorfacts, "C:\\Users\\Matheus Albuquerque\\Desktop\\MeansurementOrFacts.csv", row.names = FALSE)
+write.csv(meansurementorfacts, "MeasurementsOrFacts.csv", row.names = FALSE)
 
